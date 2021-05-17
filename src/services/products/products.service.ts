@@ -42,10 +42,14 @@ export class ProductsService {
   }
 
   update(productId: number, payload: any) {
+    const product = this.findOne(productId);
     const updatedProductIndex = this.products.findIndex(
       (item) => item.id === productId,
     );
-    this.products[updatedProductIndex] = payload;
+    this.products[updatedProductIndex] = {
+      ...product,
+      ...payload,
+    };
     return this.products[updatedProductIndex];
   }
 }
