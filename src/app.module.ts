@@ -25,6 +25,14 @@ import { UserService } from './services/user/user.service';
     CustomerController,
     BrandController,
   ],
-  providers: [AppService, ProductsService, BrandService, CategoryService, CustomerService, OrderService, UserService],
+  providers: [
+    AppService,
+    ProductsService,
+    BrandService,
+    CategoryService,
+    CustomerService,
+    OrderService,
+    UserService,
+  ],
 })
 export class AppModule {}
