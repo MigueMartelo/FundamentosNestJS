@@ -13,7 +13,7 @@ import { UserService } from '../../services/user/user.service';
 import { CreateUserDto, UpdateUserDto } from '../../dtos/user.dtos';
 
 @Controller('users')
-export class UsersController {
+export class UserController {
   constructor(private usersService: UserService) {}
 
   @Get()
