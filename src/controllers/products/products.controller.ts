@@ -6,7 +6,6 @@ import {
   Param,
   Post,
   Put,
-  Query,
 } from '@nestjs/common';
 
 import { ParseIntPipe } from './../../common/parse-int.pipe';
@@ -18,11 +17,7 @@ export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
   @Get()
-  getProducts(
-    @Query('limit') limit = 100,
-    @Query('offset') offset = 0,
-    @Query('brand') brand: string,
-  ) {
+  getProducts() {
     return this.productsService.findAll();
   }
 
