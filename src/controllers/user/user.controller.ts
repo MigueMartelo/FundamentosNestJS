@@ -1,40 +1,46 @@
 import {
-  Body,
   Controller,
-  Delete,
   Get,
   Param,
   Post,
+  Body,
   Put,
+  Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 
-@Controller('user')
-export class UserController {
+import { UserService } from '../../services/user/user.service';
+import { CreateUserDto, UpdateUserDto } from '../../dtos/user.dtos';
+
+@Controller('users')
+export class UsersController {
+  constructor(private usersService: UserService) {}
+
+  @Get()
+  findAll() {
+    return this.usersService.findAll();
+  }
+
   @Get(':userId')
-  getUser(@Param('userId') userId: string) {
-    return `User: ${userId}`;
+  get(@Param('userId', ParseIntPipe) userId: number) {
+    return this.usersService.findOne(userId);
   }
 
   @Post()
-  create(@Body() payload: any) {
-    return {
-      message: `Create action`,
-      payload,
-    };
+  create(@Body() payload: CreateUserDto) {
+    return this.usersService.create(payload);
   }
 
   @Put(':userId')
-  update(@Param('userId') userId: string, @Body() payload: any) {
-    return {
-      userId,
-      payload,
-    };
+  update(
+    @Param('userId', ParseIntPipe) userId: number,
+    @Body() payload: UpdateUserDto,
+  ) {
+    return this.usersService.update(userId, payload);
   }
 
   @Delete(':userId')
-  delete(@Param('userId') userId: string) {
-    return {
-      userId,
-    };
+  remove(@Param('userId', ParseIntPipe) userId: number) {
+    return this.usersService.remove(+userId);
   }
 }
